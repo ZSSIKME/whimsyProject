@@ -2,6 +2,7 @@ package org.spz;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.codec.Hex;
 import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
@@ -14,6 +15,8 @@ public class Main {
 
     @Test
     public void helloShiro(){
+        String encode = Hex.encodeToString("spz".getBytes());
+        byte[] decode = Hex.decode(encode);
         IniSecurityManagerFactory managerFactory = new IniSecurityManagerFactory("classpath:shiro.ini");
         SecurityManager securityManager = managerFactory.getInstance();
         SecurityUtils.setSecurityManager(securityManager);
